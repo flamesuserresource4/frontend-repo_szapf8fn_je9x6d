@@ -15,32 +15,43 @@
   html {
     font-family: var(--font-sans);
     font-feature-settings: "rlig" 1, "calt" 1;
+    color-scheme: dark;
   }
 
   body {
-    @apply antialiased;
+    @apply antialiased bg-slate-950;
   }
 }
 
-/* Custom utility classes for shadcn/ui patterns */
-@layer utilities {
-  .animate-in {
-    animation-name: animateIn;
-    animation-duration: 350ms;
-    --tw-enter-opacity: initial;
-    --tw-enter-scale: initial;
-    --tw-enter-rotate: initial;
-    --tw-enter-translate-x: initial;
-    --tw-enter-translate-y: initial;
-  }
+/* Animated gradient for hero background */
+@keyframes gradientShift {
+  0% { transform: translate3d(0,0,0) scale(1); }
+  50% { transform: translate3d(-3%, -2%, 0) scale(1.02); }
+  100% { transform: translate3d(0,0,0) scale(1); }
+}
 
-  .animate-out {
-    animation-name: animateOut;
-    animation-duration: 350ms;
-    --tw-exit-opacity: initial;
-    --tw-exit-scale: initial;
-    --tw-exit-rotate: initial;
-    --tw-exit-translate-x: initial;
-    --tw-exit-translate-y: initial;
-  }
+.bg-animated-gradient {
+  background: radial-gradient(1200px 600px at -10% -20%, rgba(16,185,129,0.12), transparent 60%),
+              radial-gradient(1000px 500px at 110% 10%, rgba(16,185,129,0.1), transparent 60%),
+              radial-gradient(800px 600px at 50% 120%, rgba(16,185,129,0.08), transparent 60%),
+              linear-gradient(180deg, rgba(2,6,23,1) 0%, rgba(2,6,23,0.9) 100%);
+  animation: gradientShift 14s ease-in-out infinite;
+}
+
+/* Subtle moving lines */
+.bg-lines {
+  background-image: linear-gradient(rgba(16,185,129,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(16,185,129,0.08) 1px, transparent 1px);
+  background-size: 40px 40px, 40px 40px;
+  animation: moveLines 20s linear infinite;
+}
+
+@keyframes moveLines {
+  0% { background-position: 0 0, 0 0; }
+  100% { background-position: 40px 40px, 40px 40px; }
+}
+
+/* Subtle grid used in sections */
+.bg-grid {
+  background-image: radial-gradient(circle at 1px 1px, rgba(16,185,129,0.2) 1px, transparent 0);
+  background-size: 22px 22px;
 }
